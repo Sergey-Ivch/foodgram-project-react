@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v(3$qa1iv+3wc-r3b6zpv(5ddky=u6rzhnhp=hz!vh4)o^ua(e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 # Application definition
@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'djoser',
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
-    'recipes.apps.RecipesConfig',
+    'recipen.apps.RecipenConfig',
 ]
 
 MIDDLEWARE = [
@@ -69,15 +69,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'foodgram.wsgi.application'
 
+#DATABASES = {
+    #'default': {
+       # 'ENGINE': os.getenv('ENGINE',
+                           # default='django.db.backends.postgresql'),
+       # 'NAME': os.getenv('DB_NAME'),
+       # 'USER': os.getenv('POSTGRES_USER'),
+       # 'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+       # 'HOST': os.getenv('DB_HOST'),
+       # 'PORT': os.getenv('DB_PORT')
+   # }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('ENGINE',
-                            default='django.db.backends.postgresql'),
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT')
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -107,13 +114,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',
-    ],
-    'DEFAULT_PAGINATION_CLASS': [
-        'api.pagination.CustomPaginator',
-    ],
-    'PAGE_SIZE': 6,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
     'SEARCH_PARAM': 'name',
 }
 
@@ -133,7 +135,9 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.Buyer'
+
+NAME = 'shopping_cart.txt'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -144,6 +148,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_URLS_REGEX = r'^/api/.*$'
-
-FILE_NAME = 'shopping_cart.txt'
 
