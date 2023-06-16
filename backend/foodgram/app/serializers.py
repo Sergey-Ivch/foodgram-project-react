@@ -205,7 +205,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
                 if len(tags_list) == 0:
                     raise serializers.ValidationError(
-                            'Список тегов не должен быть пустым')
+                        'Список тегов не должен быть пустым')
 
                 all_tags = Tag.objects.all().values_list('id', flat=True)
                 if not set(tags_list).issubset(all_tags):
