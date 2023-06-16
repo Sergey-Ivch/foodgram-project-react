@@ -1,15 +1,20 @@
 from django.contrib import admin
-from .models import Buyer
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
-class BuyerAdmin(admin.ModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     list_display = (
-        'username', 'pk', 'email', 'password', 'first_name', 'last_name',
+        'email',
+        'username',
+        'first_name',
+        'last_name',
+        'password',
     )
-    list_editable = ('password',)
-    list_filter = ('username',)
-    search_fields = ('username',)
+    search_fields = ('email', 'username')
     empty_value_display = '-пусто-'
 
-admin.site.register(Buyer, BuyerAdmin) 
 
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
