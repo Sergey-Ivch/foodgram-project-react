@@ -234,4 +234,3 @@ class ShoppingCart(models.Model):
     def __str__(self):
         return (f'Рецепт {self.recipe.name} в списке покупок пользователя: '
                 f'{self.user.get_username}')
-    
