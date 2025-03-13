@@ -40,3 +40,4 @@ class Subscribe(models.Model):
                 name='unique_subscribe'
             )
         ]
+
