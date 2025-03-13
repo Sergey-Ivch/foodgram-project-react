@@ -18,7 +18,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'backend',
     '51.250.91.182',
-    'db'
+    'db',
+    '158.160.176.0'
 ]
 
 INSTALLED_APPS = [
